@@ -17,7 +17,7 @@ export function RoleSwitcher() {
   const switchRole = async (account: typeof DEMO_ACCOUNTS[0]) => {
     setLoading(account.role);
     try {
-      const res = await fetch('http://localhost:3000/graphql', {
+      const res = await fetch(process.env.NEXT_PUBLIC_GRAPHQL_URL || 'http://localhost:3000/graphql', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
