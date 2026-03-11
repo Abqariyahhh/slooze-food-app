@@ -51,7 +51,7 @@ export function RoleSwitcher() {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-50">
+    <div className="fixed bottom-20 md:bottom-4 right-4 z-50">
       {open && (
         <div className="mb-2 bg-slate-800 border border-slate-700 rounded-xl p-3 shadow-xl w-56">
           <p className="text-xs text-slate-400 font-medium mb-2 px-1">⚡ Quick Role Switch</p>
