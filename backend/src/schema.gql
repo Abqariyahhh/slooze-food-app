@@ -1,0 +1,141 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input AddPaymentInput {
+  isDefault: Boolean
+  last4: String!
+  nickname: String
+  type: PaymentType!
+}
+
+type AuthPayload {
+  accessToken: String!
+  country: String!
+  email: String!
+  firstName: String!
+  role: String!
+  userId: String!
+}
+
+enum Country {
+  AMERICA
+  INDIA
+}
+
+input CreateOrderInput {
+  items: [OrderItemInput!]!
+  notes: String
+  restaurantId: ID!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type MenuItemType {
+  description: String
+  id: ID!
+  imageUrl: String
+  isAvailable: Boolean!
+  name: String!
+  price: Float!
+  restaurantId: String!
+}
+
+type Mutation {
+  addPayment(input: AddPaymentInput!): PaymentMethodType!
+  cancelOrder(orderId: ID!): OrderType!
+  checkoutOrder(orderId: ID!): OrderType!
+  createOrder(input: CreateOrderInput!): OrderType!
+  deletePayment(id: ID!): Boolean!
+  login(input: LoginInput!): AuthPayload!
+  register(input: RegisterInput!): AuthPayload!
+  updatePayment(id: ID!, input: UpdatePaymentInput!): PaymentMethodType!
+}
+
+input OrderItemInput {
+  menuItemId: ID!
+  quantity: Int!
+}
+
+type OrderItemType {
+  id: ID!
+  menuItemId: String!
+  menuItemName: String
+  price: Float!
+  quantity: Float!
+}
+
+type OrderType {
+  createdAt: DateTime!
+  id: ID!
+  items: [OrderItemType!]!
+  notes: String
+  restaurantId: String!
+  restaurantName: String!
+  status: String!
+  totalAmount: Float!
+  userId: String!
+}
+
+type PaymentMethodType {
+  createdAt: DateTime!
+  id: ID!
+  isDefault: Boolean!
+  last4: String!
+  nickname: String
+  type: String!
+  userId: String!
+}
+
+enum PaymentType {
+  CARD
+  UPI
+  WALLET
+}
+
+type Query {
+  health: String!
+  myOrders: [OrderType!]!
+  myPayments: [PaymentMethodType!]!
+  restaurant(id: ID!): RestaurantType!
+  restaurants: [RestaurantType!]!
+}
+
+input RegisterInput {
+  country: Country!
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+  role: Role!
+}
+
+type RestaurantType {
+  address: String
+  country: String!
+  description: String
+  id: ID!
+  isActive: Boolean!
+  menuItems: [MenuItemType!]
+  name: String!
+  rating: Float!
+}
+
+enum Role {
+  ADMIN
+  MANAGER
+  MEMBER
+}
+
+input UpdatePaymentInput {
+  isDefault: Boolean
+  nickname: String
+}
